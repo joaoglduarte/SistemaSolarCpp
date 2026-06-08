@@ -1,0 +1,8 @@
+# Arquivos compilados do C++
+simulador
+*.o
+*.out
+*.exe
+
+# Configurações locais do VS Code
+.vscode/
