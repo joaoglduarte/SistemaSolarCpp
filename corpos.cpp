@@ -50,11 +50,15 @@ public:
     }
 
     virtual void atualizar(double deltaTime) {
+        // --- TRANSLAÇÃO ---
         anguloAtual += velocidadeAngular * deltaTime * velocidadeSimulacao;
-        if (anguloAtual >= 2 * PI) anguloAtual -= 2 * PI;
+        anguloAtual = fmod(anguloAtual, 2 * PI);
+        if (anguloAtual < 0) anguloAtual += 2 * PI; // Garante que o ângulo orbital seja sempre positivo
 
+        // --- ROTAÇÃO ---
         rotacaoAtual += velocidadeRotacao * deltaTime * velocidadeSimulacao;
-        if (rotacaoAtual >= 360.0f) rotacaoAtual -= 360.0f;
+        rotacaoAtual = fmod(rotacaoAtual, 360.0);
+        if (rotacaoAtual < 0) rotacaoAtual += 360.0; // Garante que o giro do sprite seja válido no SFML
 
         // NOVO: Atualiza todas as luas deste planeta
         for (auto& sat : satelites) {
@@ -232,7 +236,7 @@ int main() {
 
     //FOCO DA CÂMERA ---
     // Lista dos astros que poderemos focar apertando TAB
-    vector<string> alvosCamera = {"Sol", "Terra", "Lua", "Marte", "Fobos", "Deimos", "Ceres", "Vesta", "Jupiter", "Saturno", "Urano", "Netuno", "Plutao", "Haumea", "Makemake", "Quaoar", "Eris", "Sedna", "Halley", "Charon", "Io", "Europa", "Ganimedes", "Calisto", "Mimas", "Enceladus", "Tethys", "Dione", "Rhea", "Titan", "Iapetus", "Miranda", "Ariel", "Umbriel", "Titania", "Oberon", "Triton"};
+    vector<string> alvosCamera = {"Sol", "Mercurio", "Venus", "Terra", "Lua", "Marte", "Fobos", "Deimos", "Ceres", "Vesta", "Jupiter", "Saturno", "Urano", "Netuno", "Plutao", "Haumea", "Makemake", "Quaoar", "Eris", "Sedna", "Halley", "Charon", "Io", "Europa", "Ganimedes", "Calisto", "Mimas", "Enceladus", "Tethys", "Dione", "Rhea", "Titan", "Iapetus", "Miranda", "Ariel", "Umbriel", "Titania", "Oberon", "Triton"};
     int indiceAlvo = 0;
     CorpoCeleste* astroFocado = nullptr; // nullptr significa câmera livre
 

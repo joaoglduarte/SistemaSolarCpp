@@ -37,7 +37,7 @@ sudo apt install libsfml-dev
 
 Na raiz do projeto, execute o comando de linkagem:
 ```bash
-g++ main.cpp CorpoCeleste.cpp SistemaSolar.cpp -o simulador -lsfml-graphics -lsfml-window -lsfml-system
+g++ corpos.cpp -o simulador -lsfml-graphics -lsfml-window -lsfml-system
 ```
 
 Garanta que a pasta assets/ (contendo todas as sprites dos astros em .png) está no mesmo diretório do executável criado, e inicie o programa:
