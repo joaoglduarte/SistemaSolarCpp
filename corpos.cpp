@@ -163,72 +163,72 @@ int main() {
     CorpoCeleste::setVelocidadeSimulacao(fatorTempo);
 
     // 1. sol
-    sistema.adicionarCorpo(make_unique<CorpoCeleste>("Sol", 40000.0, 0.0, 0.0, "sol.png", 0.0));
+    sistema.adicionarCorpo(make_unique<CorpoCeleste>("Sol", 40000.0, 0.0, 0.0, "assets/sol.png", 0.0));
 
     // 2. planetas rochosos
-    sistema.adicionarCorpo(make_unique<CorpoCeleste>("Mercurio", 2439.0, 57900000.0, 0.0000008, "mercurio.png", 10.0));
-    sistema.adicionarCorpo(make_unique<CorpoCeleste>("Venus", 6051.0, 108200000.0, 0.0000003, "venus.png", -8.0)); // Rotação retrógrada
+    sistema.adicionarCorpo(make_unique<CorpoCeleste>("Mercurio", 2439.0, 57900000.0, 0.0000008, "assets/mercurio.png", 10.0));
+    sistema.adicionarCorpo(make_unique<CorpoCeleste>("Venus", 6051.0, 108200000.0, 0.0000003, "assets/venus.png", -8.0)); // Rotação retrógrada
 
-    auto terra = make_unique<CorpoCeleste>("Terra", 6371.0, 149600000.0, 0.0000002, "terra.png", 100.0);
-    terra->adicionarSatelite(make_unique<CorpoCeleste>("Lua", 2000.0, 25000000.0, 0.000002, "lua.png", 50.0));
+    auto terra = make_unique<CorpoCeleste>("Terra", 6371.0, 149600000.0, 0.0000002, "assets/terra.png", 100.0);
+    terra->adicionarSatelite(make_unique<CorpoCeleste>("Lua", 2000.0, 25000000.0, 0.000002, "assets/lua.png", 50.0));
     sistema.adicionarCorpo(move(terra));
 
-    auto marte = make_unique<CorpoCeleste>("Marte", 3389.0, 227900000.0, 0.0000001, "marte.png", 90.0);
-    marte->adicionarSatelite(make_unique<CorpoCeleste>("Fobos", 1000.0, 12000000.0, 0.000003, "fobos.png", 60.0));
-    marte->adicionarSatelite(make_unique<CorpoCeleste>("Deimos", 800.0, 18000000.0, 0.0000025, "deimos.png", 55.0));
+    auto marte = make_unique<CorpoCeleste>("Marte", 3389.0, 227900000.0, 0.0000001, "assets/marte.png", 90.0);
+    marte->adicionarSatelite(make_unique<CorpoCeleste>("Fobos", 1000.0, 12000000.0, 0.000003, "assets/fobos.png", 60.0));
+    marte->adicionarSatelite(make_unique<CorpoCeleste>("Deimos", 800.0, 18000000.0, 0.0000025, "assets/deimos.png", 55.0));
     sistema.adicionarCorpo(move(marte));
 
     // 3. cinturao de asteroides
-    sistema.adicionarCorpo(make_unique<CorpoCeleste>("Vesta", 262.0, 353000000.0, 0.00000008, "vesta.png", 200.0));
-    sistema.adicionarCorpo(make_unique<CorpoCeleste>("Ceres", 473.0, 413000000.0, 0.00000007, "ceres.png", 150.0));
+    sistema.adicionarCorpo(make_unique<CorpoCeleste>("Vesta", 262.0, 353000000.0, 0.00000008, "assets/vesta.png", 200.0));
+    sistema.adicionarCorpo(make_unique<CorpoCeleste>("Ceres", 473.0, 413000000.0, 0.00000007, "assets/ceres.png", 150.0));
 
     //4. gigantes gasosos
-    auto jupiter = make_unique<CorpoCeleste>("Jupiter", 69911.0, 778500000.0, 0.000000016, "jupiter.png", 250.0);
+    auto jupiter = make_unique<CorpoCeleste>("Jupiter", 69911.0, 778500000.0, 0.000000016, "assets/jupiter.png", 250.0);
     // 4.5 Luas Galileanas
-    jupiter->adicionarSatelite(make_unique<CorpoCeleste>("Io", 1821.0, 120000000.0, 0.000005, "io.png", 40.0));
-    jupiter->adicionarSatelite(make_unique<CorpoCeleste>("Europa", 1560.0, 160000000.0, 0.000004, "europa.png", 35.0));
-    jupiter->adicionarSatelite(make_unique<CorpoCeleste>("Ganimedes", 2634.0, 210000000.0, 0.000003, "ganimedes.png", 30.0));
-    jupiter->adicionarSatelite(make_unique<CorpoCeleste>("Calisto", 2410.0, 270000000.0, 0.000002, "callisto.png", 25.0));
+    jupiter->adicionarSatelite(make_unique<CorpoCeleste>("Io", 1821.0, 120000000.0, 0.000005, "assets/io.png", 40.0));
+    jupiter->adicionarSatelite(make_unique<CorpoCeleste>("Europa", 1560.0, 160000000.0, 0.000004, "assets/europa.png", 35.0));
+    jupiter->adicionarSatelite(make_unique<CorpoCeleste>("Ganimedes", 2634.0, 210000000.0, 0.000003, "assets/ganimedes.png", 30.0));
+    jupiter->adicionarSatelite(make_unique<CorpoCeleste>("Calisto", 2410.0, 270000000.0, 0.000002, "assets/callisto.png", 25.0));
     sistema.adicionarCorpo(move(jupiter));
 
-    auto saturno = make_unique<CorpoCeleste>("Saturno", 58232.0, 1429000000.0, 0.000000006, "saturno.png", 230.0);
-    saturno->adicionarSatelite(make_unique<CorpoCeleste>("Mimas", 198.0, 110000000.0, 0.000004, "mimas.png", 50.0));
-    saturno->adicionarSatelite(make_unique<CorpoCeleste>("Enceladus", 252.0, 140000000.0, 0.0000035, "enceladus.png", 45.0));
-    saturno->adicionarSatelite(make_unique<CorpoCeleste>("Tethys", 531.0, 170000000.0, 0.000003, "tethys.png", 40.0));
-    saturno->adicionarSatelite(make_unique<CorpoCeleste>("Dione", 561.0, 200000000.0, 0.0000025, "dione.png", 35.0));
-    saturno->adicionarSatelite(make_unique<CorpoCeleste>("Rhea", 763.0, 240000000.0, 0.000002, "rhea.png", 30.0));
-    saturno->adicionarSatelite(make_unique<CorpoCeleste>("Titan", 2574.0, 300000000.0, 0.0000015, "titan.png", 20.0));
-    saturno->adicionarSatelite(make_unique<CorpoCeleste>("Iapetus", 734.0, 360000000.0, 0.000001, "iapetus.png", 15.0));
+    auto saturno = make_unique<CorpoCeleste>("Saturno", 58232.0, 1429000000.0, 0.000000006, "assets/saturno.png", 230.0);
+    saturno->adicionarSatelite(make_unique<CorpoCeleste>("Mimas", 198.0, 110000000.0, 0.000004, "assets/mimas.png", 50.0));
+    saturno->adicionarSatelite(make_unique<CorpoCeleste>("Enceladus", 252.0, 140000000.0, 0.0000035, "assets/enceladus.png", 45.0));
+    saturno->adicionarSatelite(make_unique<CorpoCeleste>("Tethys", 531.0, 170000000.0, 0.000003, "assets/tethys.png", 40.0));
+    saturno->adicionarSatelite(make_unique<CorpoCeleste>("Dione", 561.0, 200000000.0, 0.0000025, "assets/dione.png", 35.0));
+    saturno->adicionarSatelite(make_unique<CorpoCeleste>("Rhea", 763.0, 240000000.0, 0.000002, "assets/rhea.png", 30.0));
+    saturno->adicionarSatelite(make_unique<CorpoCeleste>("Titan", 2574.0, 300000000.0, 0.0000015, "assets/titan.png", 20.0));
+    saturno->adicionarSatelite(make_unique<CorpoCeleste>("Iapetus", 734.0, 360000000.0, 0.000001, "assets/iapetus.png", 15.0));
     sistema.adicionarCorpo(move(saturno));
 
-    auto urano = make_unique<CorpoCeleste>("Urano", 25362.0, 2871000000.0, 0.000000002, "urano.png", -150.0);
-    urano->adicionarSatelite(make_unique<CorpoCeleste>("Miranda", 235.0, 60000000.0, 0.000003, "miranda.png", 40.0));
-    urano->adicionarSatelite(make_unique<CorpoCeleste>("Ariel", 578.0, 80000000.0, 0.0000025, "ariel.png", 35.0));
-    urano->adicionarSatelite(make_unique<CorpoCeleste>("Umbriel", 584.0, 100000000.0, 0.000002, "umbriel.png", 30.0));
-    urano->adicionarSatelite(make_unique<CorpoCeleste>("Titania", 788.0, 130000000.0, 0.0000015, "titania.png", 25.0));
-    urano->adicionarSatelite(make_unique<CorpoCeleste>("Oberon", 761.0, 160000000.0, 0.000001, "oberon.png", 20.0));
+    auto urano = make_unique<CorpoCeleste>("Urano", 25362.0, 2871000000.0, 0.000000002, "assets/urano.png", -150.0);
+    urano->adicionarSatelite(make_unique<CorpoCeleste>("Miranda", 235.0, 60000000.0, 0.000003, "assets/miranda.png", 40.0));
+    urano->adicionarSatelite(make_unique<CorpoCeleste>("Ariel", 578.0, 80000000.0, 0.0000025, "assets/ariel.png", 35.0));
+    urano->adicionarSatelite(make_unique<CorpoCeleste>("Umbriel", 584.0, 100000000.0, 0.000002, "assets/umbriel.png", 30.0));
+    urano->adicionarSatelite(make_unique<CorpoCeleste>("Titania", 788.0, 130000000.0, 0.0000015, "assets/titania.png", 25.0));
+    urano->adicionarSatelite(make_unique<CorpoCeleste>("Oberon", 761.0, 160000000.0, 0.000001, "assets/oberon.png", 20.0));
     sistema.adicionarCorpo(move(urano));
 
-    auto netuno = make_unique<CorpoCeleste>("Netuno", 24622.0, 4498000000.0, 0.000000001, "netuno.png", 140.0);
-    netuno->adicionarSatelite(make_unique<CorpoCeleste>("Triton", 1353.0, 80000000.0, -0.000002, "triton.png", 30.0)); // Órbita retrógrada
+    auto netuno = make_unique<CorpoCeleste>("Netuno", 24622.0, 4498000000.0, 0.000000001, "assets/netuno.png", 140.0);
+    netuno->adicionarSatelite(make_unique<CorpoCeleste>("Triton", 1353.0, 80000000.0, -0.000002, "assets/triton.png", 30.0)); // Órbita retrógrada
     sistema.adicionarCorpo(move(netuno));
 
     // 5. cometas e transnetunianos (TNOs)
     
     // Halley (Órbita simplificada)
-    sistema.adicionarCorpo(make_unique<CorpoCeleste>("Halley", 5.0, 2600000000.0, 0.000000003, "halley.png", 50.0));
+    sistema.adicionarCorpo(make_unique<CorpoCeleste>("Halley", 5.0, 2600000000.0, 0.000000003, "assets/halley.png", 50.0));
 
-    auto plutao = make_unique<CorpoCeleste>("Plutao", 1188.0, 5906000000.0, 0.0000000006, "plutao.png", -20.0);
-    plutao->adicionarSatelite(make_unique<CorpoCeleste>("Charon", 606.0, 15000000.0, 0.000005, "charon.png", 10.0));
+    auto plutao = make_unique<CorpoCeleste>("Plutao", 1188.0, 5906000000.0, 0.0000000006, "assets/plutao.png", -20.0);
+    plutao->adicionarSatelite(make_unique<CorpoCeleste>("Charon", 606.0, 15000000.0, 0.000005, "assets/charon.png", 10.0));
     sistema.adicionarCorpo(move(plutao));
 
-    sistema.adicionarCorpo(make_unique<CorpoCeleste>("Haumea", 816.0, 6452000000.0, 0.0000000005, "haumea.png", 500.0));
-    sistema.adicionarCorpo(make_unique<CorpoCeleste>("Makemake", 715.0, 6850000000.0, 0.0000000004, "makemake.png", 80.0));
-    sistema.adicionarCorpo(make_unique<CorpoCeleste>("Quaoar", 555.0, 6500000000.0, 0.00000000045, "quaoar.png", 60.0));
-    sistema.adicionarCorpo(make_unique<CorpoCeleste>("Eris", 1163.0, 10120000000.0, 0.0000000003, "eris.png", 40.0));
+    sistema.adicionarCorpo(make_unique<CorpoCeleste>("Haumea", 816.0, 6452000000.0, 0.0000000005, "assets/haumea.png", 500.0));
+    sistema.adicionarCorpo(make_unique<CorpoCeleste>("Makemake", 715.0, 6850000000.0, 0.0000000004, "assets/makemake.png", 80.0));
+    sistema.adicionarCorpo(make_unique<CorpoCeleste>("Quaoar", 555.0, 6500000000.0, 0.00000000045, "assets/quaoar.png", 60.0));
+    sistema.adicionarCorpo(make_unique<CorpoCeleste>("Eris", 1163.0, 10120000000.0, 0.0000000003, "assets/eris.png", 40.0));
     
     //sedn
-    sistema.adicionarCorpo(make_unique<CorpoCeleste>("Sedna", 497.0, 78000000000.0, 0.00000000005, "sedna.png", 30.0));
+    sistema.adicionarCorpo(make_unique<CorpoCeleste>("Sedna", 497.0, 78000000000.0, 0.00000000005, "assets/sedna.png", 30.0));
 
     //FOCO DA CÂMERA ---
     // Lista dos astros que poderemos focar apertando TAB
