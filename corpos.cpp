@@ -66,6 +66,21 @@ public:
         }
     }
 
+    CorpoCeleste* verificarClique(sf::Vector2f posicaoMouseMundo) {
+        // 1. Verifica as luas primeiro (pois elas ficam "por cima")
+        for (auto& sat : satelites) {
+            CorpoCeleste* clicado = sat->verificarClique(posicaoMouseMundo);
+            if (clicado) return clicado;
+        }
+        
+        // 2. Verifica se as coordenadas do mouse estão dentro do retângulo do sprite
+        if (sprite.getGlobalBounds().contains(posicaoMouseMundo)) {
+            return this;
+        }
+        
+        return nullptr; // O clique não pegou em nada aqui
+    }
+
     virtual void renderizar(sf::RenderWindow& janela, double centroX, double centroY) {
         // A posição X e Y calculada Deste Astro
         double posX = centroX + (distanciaRealdoSol * escalaDistancia) * cos(anguloAtual);
@@ -134,6 +149,13 @@ public:
         for (auto& corpo : corpos) {
             CorpoCeleste* encontrado = corpo->buscarSatelite(nomeAlvo);
             if (encontrado) return encontrado;
+        }
+        return nullptr;
+    }
+    CorpoCeleste* verificarCliqueNoSistema(sf::Vector2f posicaoMouseMundo) {
+        for (auto& corpo : corpos) {
+            CorpoCeleste* clicado = corpo->verificarClique(posicaoMouseMundo);
+            if (clicado) return clicado;
         }
         return nullptr;
     }
@@ -254,20 +276,27 @@ int main() {
             }
             else if (evento.type == sf::Event::MouseButtonPressed) {
                 if (evento.mouseButton.button == sf::Mouse::Left) {
-                    arrastando = true;
-                    posicaoMouseAnterior = sf::Mouse::getPosition(janela);
-                }else if (evento.type == sf::Event::MouseButtonPressed) {
-                if (evento.mouseButton.button == sf::Mouse::Left) {
-                    arrastando = true;
-                    posicaoMouseAnterior = sf::Mouse::getPosition(janela);
                     
-                    // Se o usuário clicar para arrastar, solta o foco da câmera
-                    if (astroFocado != nullptr) {
-                        astroFocado = nullptr;
-                        cout << "Câmera livre" << endl;
+                    // 1. Traduz onde o mouse clicou na Tela para onde isso significa no Espaço
+                    sf::Vector2i mousePosTela = sf::Mouse::getPosition(janela);
+                    sf::Vector2f mousePosMundo = janela.mapPixelToCoords(mousePosTela, camera);
+
+                    // 2. Dispara o "Raio de Colisão" contra o Sistema Solar
+                    CorpoCeleste* astroClicado = sistema.verificarCliqueNoSistema(mousePosMundo);
+
+                    if (astroClicado != nullptr) {
+                        // Cenário A: O usuário clicou em cima de um astro!
+                        astroFocado = astroClicado;
+                        arrastando = false; // Bloqueia o arrasto
+                        cout << "Câmera focada em: " << astroFocado->getNome() << " (Via Clique)" << endl;
+                    } 
+                    else {
+                        // Cenário B: O usuário clicou no vazio do espaço!
+                        astroFocado = nullptr; // Solta a câmera imediatamente
+                        arrastando = true;     // Libera para puxar o espaço
+                        posicaoMouseAnterior = mousePosTela;
                     }
                 }
-            }
             }
             else if (evento.type == sf::Event::MouseButtonReleased) {
                 if (evento.mouseButton.button == sf::Mouse::Left) arrastando = false;
